@@ -26,7 +26,8 @@
 		// Choose from Mapbox's core styles, or make your own style with Mapbox Studio
 		style: 'mapbox://styles/cjannun/cldg7ndwq000501rxp9b6lw4h', // style URL
 		center: [-82.341623, 29.64901], // starting position [lng, lat]
-		zoom: 17 // starting zoom
+		zoom: 17, // starting zoom
+		minZoom: 16.01
 		});
 		// Add geolocate control to the map.
 		map.addControl(
@@ -66,19 +67,24 @@
 </body>
 <div id="footer">
 <footer>
+	<br>
 	<p align="center" id="username"></p>
+	<p align="center" id="points"></p>
 </footer>
 </div>
 </div>
 
 <script>
 		var name = window.localStorage.getItem("name");
+		var namedef = "username"
 		console.log(name);
-		if(name != '') {
-			document.getElementById("username").innerHTML = name;
+		if(name != "null") {
+			//document.getElementById("username").innerHTML = namedef;
+			document.getElementById("username").innerHTML = "username: " + name;
+			document.getElementById("points").innerHTML = "points: ";
 		}
 		else {
-			document.getElementById("username").innerHTML = "user";
+			document.getElementById("username").innerHTML = "not logged in";
 		}
 </script>
 </html>
