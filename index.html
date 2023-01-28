@@ -59,6 +59,107 @@
 				}
 			});
 		});
+			
+			
+		map.on('load', () => {
+		map.addSource('places', {
+		// This GeoJSON contains features that include an "icon"
+		// property. The value of the "icon" property corresponds
+		// to an image in the Mapbox Streets style's sprite.
+		'type': 'geojson',
+		'data': {
+		  "type": "FeatureCollection",
+		  "features": [
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"Name": "Marston"
+		      },
+		      "geometry": {
+			"coordinates": [
+			  -82.34390568062712,
+			  29.648044156393638
+			],
+			"type": "Point"
+		      }
+		    },
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"Name": "Turlington 2"
+		      },
+		      "geometry": {
+			"coordinates": [
+			  -82.34368527071044,
+			  29.64931482802136
+			],
+			"type": "Point"
+		      }
+		    },
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"Name": "Turlington"
+		      },
+		      "geometry": {
+			"coordinates": [
+			  -82.34405296701124,
+			  29.64898847485
+			],
+			"type": "Point"
+		      }
+		    },
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"Name": "Pugh Fountain"
+		      },
+		      "geometry": {
+			"coordinates": [
+			  -82.34526558247222,
+			  29.64942361217645
+			],
+			"type": "Point"
+		      }
+		    },
+		    {
+		      "type": "Feature",
+		      "properties": {
+			"Name": "Libwest"
+		      },
+		      "geometry": {
+			"coordinates": [
+			  -82.34290215571704,
+			  29.65136628812901
+			],
+			"type": "Point"
+		      }
+		    }
+		  ]
+		}
+		});
+
+
+ 
+// When a click event occurs on a feature in the places layer, open a popup at the
+// location of the feature, with description HTML from its properties.
+map.on('click', 'places', (e) => {
+// Copy coordinates array.
+const coordinates = e.features[0].geometry.coordinates.slice();
+const name = e.features[0].properties.Name;
+ 
+// Ensure that if the map is zoomed out such that multiple
+// copies of the feature are visible, the popup appears
+// over the copy being pointed to.
+while (Math.abs(e.lngLat.lng - coordinates[0]) > 180) {
+coordinates[0] += e.lngLat.lng > coordinates[0] ? 360 : -360;
+}
+ 
+new mapboxgl.Popup()
+.setLngLat(coordinates)
+.setHTML(name)
+.addTo(map);
+});	
 		
 
 </script>
