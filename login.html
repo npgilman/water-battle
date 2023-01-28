@@ -10,9 +10,50 @@
 				console.log(username);
 				console.log(pin);
 				
+				var valid = true; // edit later.
+				if (valid == false) {
+					document.getElementById("validation-text").innerHTML = "Incorrect username or password!"
+				}
+				else {
+					window.localStorage.setItem("name",document.getElementById("username").value);
+					window.location.href = "https://www.cise.ufl.edu/~dpayne1/cis4930/WaterBattle/index.html";
+				}
 				
-				window.localStorage.setItem("name",document.getElementById("username").value);
-				window.location.href = "https://www.cise.ufl.edu/~dpayne1/cis4930/WaterBattle/index.html";
+				
+			}
+			
+			var revealed = false;
+			function signUp() {
+				// send to database
+				// ask what team?
+				if (revealed == false) {
+				  // Get the parent element where the radio buttons will be added
+				var parent = document.getElementById("radio-button-container");
+
+				  // Create an array of labels for the radio buttons
+				  var labels = ["Team Blue", "Team Orange"];
+
+				  // Loop through the array to create radio buttons and labels for each option
+				  for (var i = 0; i < labels.length; i++) {
+					// Create a radio button element
+					var radioButton = document.createElement("input");
+					radioButton.type = "radio";
+					radioButton.name = "options";
+					radioButton.value = labels[i];
+
+					// Create a label element for the radio button
+					var radioLabel = document.createElement("label");
+					radioLabel.innerHTML = labels[i];
+
+					// Append the radio button and label to the parent element
+					parent.appendChild(radioButton);
+					parent.appendChild(radioLabel);
+				}
+					revealed = true;
+				}
+				else {
+				
+				}
 			}
 		</script>
 	</head>
@@ -37,9 +78,13 @@
 			<tr>
 			</tr>
 			<tr>
-				<td><input type='button' value='Sign Up' onClick='back()'> </td><td><input type='button' value='Login' onClick='login()'></td>
+				<td><input type='button' value='Sign Up' onClick='signUp()'> </td><td><input type='button' value='Login' onClick='login()'></td>
 			</tr>
 		</table>
+		</div>
+		<p align="center" id="validation-text" style="color: red;"></p>
+		<div id="radio-button-container" align="center">
+		
 		</div>
 	</body>
 	
