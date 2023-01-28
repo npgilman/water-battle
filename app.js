@@ -43,7 +43,7 @@ app.post('/sign_up', function (req, res) {
       "daily_streak": 0
   }
 
-  db.collection('Users').insertOne(data, function (err, collection) {
+  db.collection('Users').insertOne(user, function (err, collection) {
       if (err) throw err;
       console.log("User created successfully");
   });
